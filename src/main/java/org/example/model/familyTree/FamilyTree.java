@@ -7,7 +7,7 @@ import org.example.model.person.Person;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<E extends Person> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyTreeInterface> implements Serializable, Iterable<E> {
     private final List<E> family;
 
     public FamilyTree(ArrayList<E> family) {
@@ -26,10 +26,10 @@ public class FamilyTree<E extends Person> implements Serializable, Iterable<E> {
             family.add(person);
         }
         if (person.getFather() != null){
-            person.getFather().addChild(person);
+            person.getFather().addChild((Person) person);
         }
         if (person.getMother() != null){
-            person.getMother().addChild(person);
+            person.getMother().addChild((Person) person);
         }
     }
 
@@ -66,10 +66,10 @@ public class FamilyTree<E extends Person> implements Serializable, Iterable<E> {
     }
 
     public void sortByName(){
-        family.sort(new ComparatorByName());
+        family.sort((Comparator<? super E>) new ComparatorByName());
     }
 
     public void sortByBirthday(){
-        family.sort(new ComparatorByBirthday());
+        family.sort((Comparator<? super E>) new ComparatorByBirthday());
     }
 }
