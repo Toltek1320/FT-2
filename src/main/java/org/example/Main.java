@@ -27,8 +27,7 @@ public class Main {
 
         Service service = new Service(tree);
         View view = new ConsoleUI();
-        Presenter presenter = new Presenter(view, service);
-
+        new Presenter(view, service);
         view.start();
     }
 }
